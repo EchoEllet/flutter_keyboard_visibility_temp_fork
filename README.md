@@ -1,159 +1,34 @@
-# Flutter Keyboard Visibility
-[![pub package](https://img.shields.io/pub/v/flutter_keyboard_visibility.svg?label=flutter_keyboard_visibility&color=blue)](https://pub.dev/packages/flutter_keyboard_visibility)
-![ci](https://github.com/MisterJimson/flutter_keyboard_visibility/actions/workflows/test.yml/badge.svg?branch=master)
-[![codecov](https://codecov.io/gh/MisterJimson/flutter_keyboard_visibility/branch/master/graph/badge.svg)](https://codecov.io/gh/MisterJimson/flutter_keyboard_visibility)
+# Flutter Keyboard Visibility Temp Fork
 
-React to keyboard visibility changes.
+This is a temporary unofficial fork of [flutter_keyboard_visibility](https://pub.dev/packages/flutter_keyboard_visibility) as a response to some of the issues we had in [flutter_quill](https://pub.dev/packages/flutter_quill). See [#2290](https://github.com/singerdmx/flutter-quill/issues/2290) and [#1889](https://github.com/singerdmx/flutter-quill/issues/1889).
 
-### Note about Flutter Web and Desktop support
+Will be maintained for a short while once we find a replacement, fix those issues, or develop your own solution in [quill_native_bridge](https://pub.dev/packages/quill_native_bridge).
 
-Web support is an open issue [here](https://github.com/MisterJimson/flutter_keyboard_visibility/issues/10), desktop support is an open issue [here](https://github.com/MisterJimson/flutter_keyboard_visibility/issues/124). Currently this library will just return `false` for keyboard visibility on web and desktop.
+We don't recommend using this package as a dependency in packages published to [pub.dev](https://pub.dev/) as it's very likely to be break after a short while, however, if you're developing an app, this might be a temporary replacement for you once those PRs reviewed in the upstream repo or find a replacement:
 
-## Install
-[Install the package](https://pub.dev/packages/flutter_keyboard_visibility/install)
-## Usage: React to Keyboard Visibility Changes
-### Option 1: Within your `Widget` tree using a builder
-Build your Widget tree based on whether or not the keyboard is visible by using `KeyboardVisibilityBuilder`.
-```dart
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+- [#164](https://github.com/MisterJimson/flutter_keyboard_visibility/pull/164)
+- [#159](https://github.com/MisterJimson/flutter_keyboard_visibility/pull/159)
+- [#155](https://github.com/MisterJimson/flutter_keyboard_visibility/pull/155)
 
-/// In any of your widgets...
-@override
-Widget build(BuildContext context) {
-  return KeyboardVisibilityBuilder(
-      builder: (context, isKeyboardVisible) {
-        return Text(
-          'The keyboard is: ${isKeyboardVisible ? 'VISIBLE' : 'NOT VISIBLE'}',
-        );
-      }
-  );
-```
-### Option 2: Within your `Widget` tree using a provider
-Build your `Widget` tree based on whether or not the keyboard is
-visible by including a `KeyboardVisibilityProvider` near the top
-of your tree.
-```dart
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+We don't plan on introduce breaking changes unless there is a strong reason even if we will have less clean API. [flutter_keyboard_visibility_platform_interface](https://pub.dev/packages/flutter_keyboard_visibility_platform_interface) is still a dependency.
 
-// Somewhere near the top of your tree...
-@override
-Widget build(BuildContext context) {
-  return KeyboardVisibilityProvider(
-    child: MyDemoPage(),
-  );
-}
+This fork aim to solve the following issues:
 
-// Within MyDemoPage...
-@override
-Widget build(BuildContext context) {
-  final bool isKeyboardVisible = KeyboardVisibilityProvider.isKeyboardVisible(context);
-  return Text(
-    'The keyboard is: ${isKeyboardVisible ? 'VISIBLE' : 'NOT VISIBLE'}',
-  );
-}
-```
+- Use the Flutter default `compileSdkVersion` as a workaround to a bug in Flutter [#63533](https://github.com/flutter/flutter/issues/63533). Allowing you to target the latest `compileSdkVersion`
+- Support for [Flutter/WASM](https://docs.flutter.dev/platform-integration/web/wasm). Currently using `dart:html` or `package:js` will prevent from compiling the app using Wasm target. It looks like `flutter_keyboard_visibility_web` was created to always return `false` on web platforms. The Web is still not supported with this fork.
 
-### Option 3: Direct query and subscription
-
-Query and/or subscribe to keyboard visibility directly with the
-`KeyboardVisibilityController` class.
+Your existing code that use `package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart` should work by replacing it with:
 
 ```dart
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'dart:async';
-
-late StreamSubscription<bool> keyboardSubscription;
-
-@override
-void initState() {
-  super.initState();
-
-  var keyboardVisibilityController = KeyboardVisibilityController();
-  // Query
-  print('Keyboard visibility direct query: ${keyboardVisibilityController.isVisible}');
-
-  // Subscribe
-  keyboardSubscription = keyboardVisibilityController.onChange.listen((bool visible) {
-    print('Keyboard visibility update. Is visible: $visible');
-  });
-}
-
-@override
-void dispose() {
-  keyboardSubscription.cancel();
-  super.dispose();
-}
+import 'package:flutter_keyboard_visibility_temp_fork/flutter_keyboard_visibility_temp_fork.dart';
 ```
-## Usage: Dismiss keyboard on tap
-Place a `KeyboardDismissOnTap` near the top of your `Widget` tree. When a user taps outside of the currently focused `Widget`, the `Widget` will drop focus and the keyboard will be dismissed.
-```dart
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-// Somewhere near the top of your tree...
-@override
-Widget build(BuildContext context) {
-  return KeyboardDismissOnTap(
-    child: MyDemoPage(),
-  );
-}
-```
-By default `KeyboardDismissOnTap` will only dismiss taps not captured by other interactive `Widget`s, like buttons. If you would like to dismiss the keyboard for any tap, including taps on interactive `Widget`s, set `dismissOnCapturedTaps` to true.
-```dart
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+Once you remove `flutter_keyboard_visibility` from your `pubspec.yaml` and add `flutter_keyboard_visibility_temp_fork` instead.
 
-// Somewhere near the top of your tree...
-@override
-Widget build(BuildContext context) {
-  return KeyboardDismissOnTap(
-    dismissOnCapturedTaps: true,
-    child: MyDemoPage(),
-  );
-}
-```
-The `IgnoreKeyboardDismiss` `Widget` can be used to further refine which taps do and do not dismiss the keyboard. Checkout the example app for more detail.
-## Testing
-### Testing using mocks
-`KeyboardVisibilityProvider` and `KeyboardVisibilityBuilder` accept a `controller` parameter that allow you to mock or replace the logic for reporting keyboard visibility updates.
-```dart
-@GenerateMocks([KeyboardVisibilityController])
-void main() {
-  testWidgets('It reports true when the keyboard is visible', (WidgetTester tester) async {
-    // Pretend that the keyboard is visible.
-    var mockController = MockKeyboardVisibilityController();
-    when(mockController.onChange)
-        .thenAnswer((_) => Stream.fromIterable([true]));
-    when(mockController.isVisible).thenAnswer((_) => true);
+`flutter_keyboard_visibility_web` and `flutter_keyboard_visibility` were merged into one package since we didn't see a strong reason for our fork to have multiple packages, desktop is not meant to be supported (virtual keyboard detection is still not a feature) and web is still not supported. The package should still return `false` on those unsupported platforms. Only Android and iOS are supported.
 
-    // Build a Widget tree and query KeyboardVisibilityProvider
-    // for the visibility of the keyboard.
-    bool? isKeyboardVisible;
+The fork `flutter_keyboard_visibility_temp_fork` still depends on [flutter_keyboard_visibility_platform_interface](https://pub.dev/packages/flutter_keyboard_visibility_platform_interface), [flutter_keyboard_visibility_macos](https://pub.dev/packages/flutter_keyboard_visibility_macos),
+[flutter_keyboard_visibility_windows](https://pub.dev/packages/flutter_keyboard_visibility_windows) and [flutter_keyboard_visibility_linux](https://pub.dev/packages/flutter_keyboard_visibility_linux)
+for compatibility.
 
-    await tester.pumpWidget(
-      KeyboardVisibilityProvider(
-        controller: mockController,
-        child: Builder(
-          builder: (BuildContext context) {
-            isKeyboardVisible =
-                KeyboardVisibilityProvider.isKeyboardVisible(context);
-            return SizedBox();
-          },
-        ),
-      ),
-    );
-
-    // Verify that KeyboardVisibilityProvider reported that the
-    // keyboard is visible.
-    expect(isKeyboardVisible, true);
-  });
-}
-```
-### Testing with a global override 
-Call `KeyboardVisibilityTesting.setVisibilityForTesting(false);` to set a custom value to use during `flutter test`. This is set globally and will override the standard logic of the native platform.
-```dart
-void main() {
-  testWidgets('My Test', (WidgetTester tester) async {
-    KeyboardVisibilityTesting.setVisibilityForTesting(true);
-    await tester.pumpWidget(MyApp());
-  });
-}
-```
+Refer to [flutter_keyboard_visibility](https://pub.dev/packages/flutter_keyboard_visibility) for more details about the usage. We're looking forward to seeing new changes in `flutter_keyboard_visibility` so this fork is no longer necessary.
