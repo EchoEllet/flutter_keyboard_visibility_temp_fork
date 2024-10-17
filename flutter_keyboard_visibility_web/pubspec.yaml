@@ -11,9 +11,6 @@ environment:
 dependencies:
   meta: ">=1.0.0 <2.0.0"
   flutter_keyboard_visibility_platform_interface: ^2.0.0
-  flutter_keyboard_visibility_linux: ^1.0.0
-  flutter_keyboard_visibility_macos: ^1.0.0
-  flutter_keyboard_visibility_windows: ^1.0.0
   flutter:
     sdk: flutter
   # For web only
@@ -31,17 +28,6 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android:
-        package: com.jrai.flutter_keyboard_visibility
-        pluginClass: FlutterKeyboardVisibilityPlugin
-      ios:
-        pluginClass: FlutterKeyboardVisibilityPlugin
       web:
         pluginClass: FlutterKeyboardVisibilityPluginWeb
         fileName: flutter_keyboard_visibility_web.dart
-      macos:
-        default_package: flutter_keyboard_visibility_macos
-      linux:
-        default_package: flutter_keyboard_visibility_linux
-      windows:
-        default_package: flutter_keyboard_visibility_windows
