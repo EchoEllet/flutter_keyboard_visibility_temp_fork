@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_keyboard_visibility_temp_fork/src/keyboard_visibility_controller.dart';
+import 'package:flutter_keyboard_visibility_web/src/keyboard_visibility_controller.dart';
 
 /// Widget that reports to its descendants whether or not
 /// the keyboard is currently visible.

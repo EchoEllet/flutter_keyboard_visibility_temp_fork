@@ -1,4 +1,4 @@
-import 'package:flutter_keyboard_visibility_temp_fork/src/keyboard_visibility_handler.dart';
+import 'package:flutter_keyboard_visibility_web/src/keyboard_visibility_handler.dart';
 
 /// Provides direct information about keyboard visibility and allows you
 /// to subscribe to changes.

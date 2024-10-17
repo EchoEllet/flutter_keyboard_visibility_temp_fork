@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_keyboard_visibility_temp_fork:
+  flutter_keyboard_visibility_web:
     path: ../
 
 dev_dependencies:

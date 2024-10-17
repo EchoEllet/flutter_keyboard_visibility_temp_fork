@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility_temp_fork/flutter_keyboard_visibility_temp_fork.dart';
+import 'package:flutter_keyboard_visibility_web/flutter_keyboard_visibility.dart';
 
 class ProviderDemo extends StatelessWidget {
   ProviderDemo({Key? key}) : super(key: key);

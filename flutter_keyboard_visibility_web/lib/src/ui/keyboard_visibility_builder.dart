@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_keyboard_visibility_temp_fork/src/keyboard_visibility_controller.dart';
+import 'package:flutter_keyboard_visibility_web/src/keyboard_visibility_controller.dart';
 
 /// A convenience builder that exposes if the native keyboard is visible.
 class KeyboardVisibilityBuilder extends StatelessWidget {

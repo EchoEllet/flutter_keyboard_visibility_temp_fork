@@ -20,14 +20,14 @@ This fork aim to solve the following issues:
 Your existing code that use `package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart` should work by replacing it with:
 
 ```dart
-import 'package:flutter_keyboard_visibility_temp_fork/flutter_keyboard_visibility_temp_fork.dart';
+import 'package:flutter_keyboard_visibility_web/flutter_keyboard_visibility_web.dart';
 ```
 
-Once you remove `flutter_keyboard_visibility` from your `pubspec.yaml` and add `flutter_keyboard_visibility_temp_fork` instead.
+Once you remove `flutter_keyboard_visibility` from your `pubspec.yaml` and add `flutter_keyboard_visibility_web` instead.
 
 `flutter_keyboard_visibility_web` and `flutter_keyboard_visibility` were merged into one package since we didn't see a strong reason for our fork to have multiple packages, desktop is not meant to be supported (virtual keyboard detection is still not a feature) and web is still not supported. The package should still return `false` on those unsupported platforms. Only Android and iOS are supported.
 
-The fork `flutter_keyboard_visibility_temp_fork` still depends on [flutter_keyboard_visibility_platform_interface](https://pub.dev/packages/flutter_keyboard_visibility_platform_interface), [flutter_keyboard_visibility_macos](https://pub.dev/packages/flutter_keyboard_visibility_macos),
+The fork `flutter_keyboard_visibility_web` still depends on [flutter_keyboard_visibility_platform_interface](https://pub.dev/packages/flutter_keyboard_visibility_platform_interface), [flutter_keyboard_visibility_macos](https://pub.dev/packages/flutter_keyboard_visibility_macos),
 [flutter_keyboard_visibility_windows](https://pub.dev/packages/flutter_keyboard_visibility_windows) and [flutter_keyboard_visibility_linux](https://pub.dev/packages/flutter_keyboard_visibility_linux)
 for compatibility.
 

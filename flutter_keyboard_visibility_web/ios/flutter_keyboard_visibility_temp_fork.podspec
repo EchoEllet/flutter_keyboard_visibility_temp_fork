@@ -1,15 +1,15 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint flutter_keyboard_visibility_temp_fork.podspec' to validate before publishing.
+# Run `pod lib lint flutter_keyboard_visibility_web.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_keyboard_visibility_temp_fork'
+  s.name             = 'flutter_keyboard_visibility_web'
   s.version          = '0.0.1'
-  s.summary          = 'flutter_keyboard_visibility_temp_fork'
+  s.summary          = 'flutter_keyboard_visibility_web'
   s.description      = <<-DESC
 Flutter keyboard visibility
                        DESC
-  s.homepage         = 'https://github.com/EchoEllet/flutter_keyboard_visibility_temp_fork'
+  s.homepage         = 'https://github.com/EchoEllet/flutter_keyboard_visibility_web'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Jason Rai' => 'jason.c.rai@gmail.com' }
   s.source           = { :path => '.' }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility_temp_fork/src/keyboard_visibility_handler.dart';
+import 'package:flutter_keyboard_visibility_web/src/keyboard_visibility_handler.dart';
 
 @visibleForTesting
 class KeyboardVisibilityTesting {

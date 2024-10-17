@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility_temp_fork/flutter_keyboard_visibility_temp_fork.dart';
+import 'package:flutter_keyboard_visibility_web/flutter_keyboard_visibility.dart';
 
 class KeyboardDismissDemo extends StatelessWidget {
   const KeyboardDismissDemo({Key? key}) : super(key: key);

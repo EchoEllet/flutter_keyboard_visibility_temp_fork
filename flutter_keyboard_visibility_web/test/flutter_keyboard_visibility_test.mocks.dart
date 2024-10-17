@@ -4,7 +4,7 @@
 
 import 'dart:async' as _i3;
 
-import 'package:flutter_keyboard_visibility_temp_fork/src/keyboard_visibility_controller.dart'
+import 'package:flutter_keyboard_visibility_web/src/keyboard_visibility_controller.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
