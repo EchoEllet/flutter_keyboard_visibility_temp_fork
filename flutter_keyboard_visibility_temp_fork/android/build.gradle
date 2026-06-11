@@ -27,7 +27,7 @@ android {
         namespace 'com.jrai.flutter_keyboard_visibility_temp_fork'
     }
 
-    compileSdkVersion 34
+    compileSdk = flutter.compileSdkVersion
 
     defaultConfig {
         minSdkVersion 19
