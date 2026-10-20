@@ -1,6 +1,7 @@
 ## [0.1.6] - February 20, 2025
 
 - Fixes WASM compilation issue when using [`flutter_keyboard_visibility`](https://pub.dev/packages/flutter_keyboard_visibility) with this package by removing the deprecated class `FlutterKeyboardVisibilityPluginWeb` which is not expected to be used by clients.
+- [iOS] ignore show notifications for an off-screen keyboard.
 
 ## [0.1.5] - December 2, 2024
 
